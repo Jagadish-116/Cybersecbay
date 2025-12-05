@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersec Jobs - Cybersecbay</title>
+<link rel="icon" type="image/png" href="WhatsApp Image 2025-08-28 at 6.15.08 PM.jpeg" />
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+    
+    /* --- THEME COLORS (BLOOD ORANGE GLITCH) --- */
+    :root {
+        --color-primary: #FF4500; /* Orange Red (Main Highlight) */
+        --color-secondary: #FFA07A; /* Light Salmon (Secondary Highlight) */
+        --color-text: #EFEFEF; /* Standard Text */
+        --color-dark: #0D0D0D; /* Pure Black Background */
+        --color-bg-card: rgba(255, 69, 0, 0.05); /* Light translucent primary */
+        --color-border-card: rgba(255, 69, 0, 0.3); /* Translucent primary border */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Courier Prime', monospace;
+        background: var(--color-dark);
+        color: var(--color-text);
+        overflow-x: hidden;
+        padding-top: 80px;
+    }
+    
+    /* Matrix Background Animation */
+    .matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+    }
+    
+    /* Navbar */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid var(--color-primary);
+        z-index: 1000;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--color-primary);
+        text-shadow: 0 0 20px var(--color-primary);
+        text-decoration: none;
+    }
+    
+    .burger-menu {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .burger-line {
+        width: 25px;
+        height: 3px;
+        background: var(--color-primary);
+        transition: 0.3s;
+        box-shadow: 0 0 10px var(--color-primary);
+    }
+    
+    .burger-menu.active .burger-line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .burger-menu.active .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .burger-menu.active .burger-line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(10px);
+        border-left: 2px solid var(--color-primary);
+        transition: 0.3s;
+        z-index: 999;
+        padding: 5rem 2rem;
+    }
+    
+    .mobile-menu.active {
+        right: 0;
+    }
+    
+    .mobile-menu a {
+        display: block;
+        color: var(--color-text);
+        text-decoration: none;
+        padding: 1rem 0;
+        /* Updated border color */
+        border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+        transition: 0.3s;
+        font-size: 1.1rem;
+    }
+    
+    .mobile-menu a:hover {
+        color: var(--color-primary);
+        text-shadow: 0 0 10px var(--color-primary);
+        padding-left: 1rem;
+    }
+    
+    /* Page Header */
+    .page-header {
+        text-align: center;
+        padding: 4rem 2rem 2rem;
+        /* Updated gradient for blood orange theme */
+        background: linear-gradient(45deg, var(--color-dark), #4a1700, var(--color-secondary));
+        border-bottom: 3px solid var(--color-primary);
+    }
+    
+    .page-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--color-primary);
+        text-shadow: 0 0 30px var(--color-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1.2rem;
+        color: var(--color-text);
+    }
+    
+    /* Main Content */
+    .main-content {
+        padding: 3rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    /* Job Listings */
+    .job-listing {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .job-card {
+        background: var(--color-bg-card);
+        border: 2px solid var(--color-border-card);
+        border-radius: 8px;
+        padding: 1.5rem 2rem;
+        transition: 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        
+        /* Subtle Gradient Border Effect */
+        border-image: linear-gradient(45deg, var(--color-secondary), var(--color-primary)) 1;
+        border-width: 2px;
+        border-style: solid;
+    }
+
+    .job-card:hover {
+        transform: scale(1.01);
+        /* Updated box shadow for orange */
+        box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+        background: rgba(255, 69, 0, 0.08);
+    }
+
+    .job-info {
+        flex-grow: 1;
+    }
+
+    .job-company {
+        font-family: 'Orbitron', monospace;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        margin-bottom: 0.2rem;
+    }
+    
+    .job-role {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--color-primary);
+        /* Updated text shadow for orange */
+        text-shadow: 0 0 5px rgba(255, 69, 0, 0.4);
+        margin-bottom: 1rem;
+    }
+
+    .job-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.9rem;
+        color: var(--color-text);
+    }
+    
+    .job-meta span {
+        display: flex;
+        align-items: center;
+        /* Updated background for meta data to derived secondary color */
+        background: rgba(255, 160, 122, 0.1);
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        border: 1px solid var(--color-secondary);
+    }
+    
+    /* Icon styling for meta info */
+    .job-meta span::before {
+        content: '';
+        margin-right: 8px;
+        color: var(--color-primary);
+        font-weight: bold;
+    }
+
+    .job-meta .location::before { content: '📍'; font-size: 1.1rem; }
+    .job-meta .experience::before { content: '⏱️'; font-size: 1.1rem; }
+    .job-meta .type::before { content: '💼'; font-size: 1.1rem; }
+
+    .apply-btn {
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        border: none;
+        border-radius: 5px;
+        padding: 0.8rem 1.8rem;
+        color: #000;
+        font-family: 'Orbitron', monospace;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        white-space: nowrap; /* Prevent wrapping on the button text */
+        margin-left: 2rem;
+    }
+    
+    .apply-btn:hover {
+        transform: translateY(-2px);
+        /* Updated box shadow and gradient for orange */
+        box-shadow: 0 5px 20px rgba(255, 69, 0, 0.8);
+        background: linear-gradient(90deg, #ff8c00, var(--color-primary));
+    }
+    
+    /* Footer */
+    .footer {
+        background: #000;
+        border-top: 2px solid var(--color-primary);
+        padding: 3rem 2rem 1rem;
+        margin-top: 4rem;
+    }
+    
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+    
+    .footer-section h3 {
+        color: var(--color-primary);
+        font-family: 'Orbitron', monospace;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-section a {
+        display: block;
+        color: var(--color-text);
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+        transition: 0.3s;
+    }
+    
+    .footer-section a:hover {
+        color: var(--color-secondary);
+        text-shadow: 0 0 10px var(--color-secondary);
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        /* Updated border for orange theme */
+        border-top: 1px solid rgba(255, 69, 0, 0.3);
+        color: #666;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 2rem;
+        }
+        
+        .main-content {
+            padding: 1rem;
+        }
+        
+        .job-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1rem;
+        }
+        
+        .job-role {
+            font-size: 1.2rem;
+        }
+        
+        .job-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .apply-btn {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh; /* Ensures it takes up the full screen height */
+    overflow-y: auto; /* *** THIS IS THE FIX: Enables vertical scrolling within the menu *** */
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+    z-index: 999;
+    padding: 5rem 2rem;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu a {
+    display: block;
+    text-decoration: none;
+    padding: 1rem 0;
+    transition: 0.3s;
+    font-size: 1.1rem;
+}
+
+</style>
+</head>
+<body>
+<!-- Matrix Background -->
+<canvas class="matrix-bg" id="matrix"></canvas>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="logo">Cybersecbay</a>
+    <div class="burger-menu" id="burgerMenu">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="roadmaps.html">Roadmaps</a>
+        <a href="ebooks.html">eBooks</a>
+        <a href="cheatsheets.html">Cheatsheets</a>
+        <a href="courses.html">Courses</a>
+        <a href="playlists.html">YouTube Playlists</a>
+        <a href="videos.html">Recorded Videos</a>
+        <a href="bootcamps.html">Bootcamps/Hackathons</a>         
+        <a href="jobs.html">Job Portal</a>
+        <a href="cybersectools.html">CyberSec Tools</a>      
+        <a href="https://cybersec-acadamy.vercel.app/" target="_blank">CyberSec Acadamy</a>
+        <a href="about.html">About Us</a>
+    </div>
+
+<!-- Page Header -->
+<header class="page-header">
+    <h1 class="page-title">🚀 Cybersecurity Job Portal</h1>
+    <p class="page-subtitle">Find your next role in the world of offensive and defensive security.</p>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="job-listing">
+        
+        <!-- Job Card 1 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">Tata Consultancy Services (TCS)</p>
+        <h3 class="job-role">Cybersecurity Specialist / SOC / VAPT</h3>
+        <div class="job-meta">
+            <span class="location">Hyderabad, Bengaluru, Chennai, Mumbai, Pune (India)</span>
+            <span class="experience">4+ Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://www.tcs.com/careers/india/tcs-cybersecurity-hiring" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 2 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">UST</p>
+        <h3 class="job-role">L1 SOC Analyst</h3>
+        <div class="job-meta">
+            <span class="location">Hyderabad, Telangana</span>
+            <span class="experience">0–2 Years (Entry / Fresher)</span>
+            <span class="type">Full-Time / Shift-based</span>
+        </div>
+    </div>
+    <a href="https://in.linkedin.com/jobs/soc-analyst-jobs-hyderabad" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 3 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">airtel</p>
+        <h3 class="job-role">Penetration Tester / Security Analyst</h3>
+        <div class="job-meta">
+            <span class="location">Delhi / NCR, India</span>
+            <span class="experience">1–4 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://in.linkedin.com/jobs/penetration-tester-jobs" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 4 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">Google</p>
+        <h3 class="job-role">Security Analyst / SOC / InfoSec</h3>
+        <div class="job-meta">
+            <span class="location">Hyderabad, Telangana</span>
+            <span class="experience">0–3 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://in.linkedin.com/jobs/cyber-security-analyst-jobs" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 5 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">ValueLabs</p>
+        <h3 class="job-role">SOC Analyst – Vulnerability Management</h3>
+        <div class="job-meta">
+            <span class="location">Hyderabad, Telangana</span>
+            <span class="experience">1–4 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://in.linkedin.com/jobs/soc-analyst-jobs-hyderabad" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 6 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">AXA XL</p>
+        <h3 class="job-role">SOC Analyst Level 2 / Incident Response</h3>
+        <div class="job-meta">
+            <span class="location">Bengaluru / Karnataka, India</span>
+            <span class="experience">2–5 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://www.glassdoor.co.in/Job/india-soc-analyst-jobs-SRCH_IL.0,5_IN115_KO6,17.htm" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 7 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">Techdefence Labs</p>
+        <h3 class="job-role">SOC Analyst L1</h3>
+        <div class="job-meta">
+            <span class="location">Ahmedabad, Gujarat, India</span>
+            <span class="experience">0–2 Years (Entry / Fresher)</span>
+            <span class="type">Full-Time / Shift</span>
+        </div>
+    </div>
+    <a href="https://www.glassdoor.co.in/Job/india-soc-analyst-jobs-SRCH_IL.0,5_IN115_KO6,17.htm" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 8 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">Solenis</p>
+        <h3 class="job-role">Junior Security Analyst / Fresher</h3>
+        <div class="job-meta">
+            <span class="location">Hyderabad, Telangana, India</span>
+            <span class="experience">0–2 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://in.indeed.com/q-walk-in-interview-for-freshers,soc-analyst-l-hyderabad" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 9 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">HDFC Securities</p>
+        <h3 class="job-role">VAPT / Security Engineer</h3>
+        <div the="" class="job-meta">
+            <span class="location">Mumbai / NCR, India</span>
+            <span class="experience">2–5 Years</span>
+            <span class="type">Full-Time</span>
+        </div>
+    </div>
+    <a href="https://in.linkedin.com/jobs/vulnerability-assessment-and-penetration-testing-vapt-jobs" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+<!-- Job Card 10 -->
+<div class="job-card">
+    <div class="job-info">
+        <p class="job-company">Radiant IT Services Pvt. Ltd.</p>
+        <h3 class="job-role">Cyber Security Intern / Fresher</h3>
+        <div class="job-meta">
+            <span class="location">Pune, Maharashtra, India</span>
+            <span class="experience">Internship / Fresher</span>
+            <span class="type">Part-Time / Full-Time</span>
+        </div>
+    </div>
+    <a href="https://www.glassdoor.co.in/Job/india-cyber-security-fresher-jobs-SRCH_IL.0,5_IN115_KO6,28.htm" target="_blank" class="apply-btn">APPLY NOW</a>
+</div>
+
+        
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="cheatsheets.html">Cheatsheets</a>
+            <a href="ebooks.html">eBooks</a>
+            <a href="videos.html">Recorded Videos</a>
+            <a href="courses.html">Courses</a>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <a href="playlists.html">YouTube Playlists</a>
+            <a href="roadmaps.html">Roadmaps</a>
+            <a href="bootcamps.html">Bootcamps/Hackathons</a>
+            <a href="about.html">About Us</a>
+        </div>
+        <div class="footer-section">
+                <h3>Contact Us</h3>
+                <a href="cybersecbay@gmail.com">cybersecbay@gmail.com</a>
+            </div>  
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Cybersecbay. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Matrix Background Animation
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+    const matrixArray = matrix.split("");
+    
+    const fontSize = 10;
+    const columns = canvas.width / fontSize;
+    
+    const drops = [];
+    for(let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+    
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
+        ctx.font = fontSize + 'px monospace';
+        
+        for(let i = 0; i < drops.length; i++) {
+            const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(drawMatrix, 35);
+    
+    // Burger Menu Toggle
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    burgerMenu.addEventListener('click', () => {
+        burgerMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!burgerMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+            burgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+    });
+    
+    // Resize canvas on window resize
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+</body>
+</html>

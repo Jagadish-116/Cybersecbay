@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheatsheets - Cybersecbay</title>
+    <link rel="icon" type="image/png" href="WhatsApp Image 2025-08-28 at 6.15.08 PM.jpeg" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+        
+        /* Matrix Background Animation */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ff6b35;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ff6b35;
+            text-shadow: 0 0 20px #ff6b35;
+            text-decoration: none;
+        }
+        
+        .burger-menu {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: #ff6b35;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #ff6b35;
+        }
+        
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 2px solid #ff6b35;
+            transition: 0.3s;
+            z-index: 999;
+            padding: 5rem 2rem;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            color: #ff6b35;
+            text-decoration: none;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .mobile-menu a:hover {
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+            padding-left: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(45deg, #0a0a0a, #2d1b69, #ff6b35);
+        }
+        
+        .page-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ff6b35;
+            text-shadow: 0 0 30px #ff6b35;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background: rgba(255, 107, 53, 0.05);
+            border: 2px solid #ff6b35;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            border-color: #00ff41;
+        }
+        
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .resource-card:hover::before {
+            left: 100%;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .card-info {
+            flex: 1;
+        }
+        
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-meta {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #ff6b35, #ff0080);
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            color: #000;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #000;
+            border-top: 2px solid #ff6b35;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: #ff6b35;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+        }
+    
+    /* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh; /* Ensures it takes up the full screen height */
+    overflow-y: auto; /* *** THIS IS THE FIX: Enables vertical scrolling within the menu *** */
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+    z-index: 999;
+    padding: 5rem 2rem;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu a {
+    display: block;
+    text-decoration: none;
+    padding: 1rem 0;
+    transition: 0.3s;
+    font-size: 1.1rem;
+}
+</style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Cybersecbay</a>
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="roadmaps.html">Roadmaps</a>
+        <a href="ebooks.html">eBooks</a>
+        <a href="cheatsheets.html">Cheatsheets</a>
+        <a href="courses.html">Courses</a>
+        <a href="playlists.html">YouTube Playlists</a>
+        <a href="videos.html">Recorded Videos</a>
+        <a href="bootcamps.html">Bootcamps/Hackathons</a>       
+        <a href="jobs.html">Job Portal</a>
+        <a href="cybersectools.html">CyberSec Tools</a>        
+        <a href="https://cybersec-acadamy.vercel.app/" target="_blank">CyberSec Acadamy</a>
+        <a href="about.html">About Us</a>
+    </div>
+    
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Cheatsheets</h1>
+        <p class="page-subtitle">Quick reference guides for cybersecurity tools and techniques</p>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="resource-grid">
+            <div class="resource-card">
+    <div class="card-header">
+        <div class="card-info">
+            <h3 class="card-title">Linux Permission Cheatsheet</h3>
+            <p class="card-description">Quick guide to Linux file permissions and commands.</p>
+            <div class="card-meta">PDF • 1 Page • 112 KB</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1LWQZtXELI3-0VJGkhjgc97Xwj5pVmoF_/view?usp=drive_link" class="download-btn">Download</a>
+    </div>
+</div>
+
+<div class="resource-card">
+    <div class="card-header">
+        <div class="card-info">
+            <h3 class="card-title">90+ Vital Linux Commands</h3>
+            <p class="card-description">Useful Linux commands for beginners and pros.</p>
+            <div class="card-meta">PDF •1 Page • 1.8 MB </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1clulb0xpLv0kG1XzWCzatQrq09vDX_nS/view?usp=drive_link" class="download-btn">Download</a>
+    </div>
+</div>
+
+<div class="resource-card">
+    <div class="card-header">
+        <div class="card-info">
+            <h3 class="card-title">The One Page Linux Manual</h3>
+            <p class="card-description">One-page summary of key Linux commands.</p>
+            <div class="card-meta">PDF • 1 Page • 94 KB</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1co9exlgWEins4ysN_GjleW3GBlGi5_Vp/view?usp=drive_link" class="download-btn">Download</a>
+    </div>
+</div>
+
+<div class="resource-card">
+    <div class="card-header">
+        <div class="card-info">
+            <h3 class="card-title">Wifi Penetration Testing Cheatsheet</h3>
+            <p class="card-description">Basic commands and tools for WiFi testing.</p>
+            <div class="card-meta">PDF • 4 Pages • 2.6 MB</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1cmZtxS-64ME6HRSdc5lKeB6t7cL1oSbz/view?usp=drive_link" class="download-btn">Download</a>
+    </div>
+</div>
+
+<div class="resource-card">
+    <div class="card-header">
+        <div class="card-info">
+            <h3 class="card-title">Hasing and Encoding Cheatsheet</h3>
+            <p class="card-description">Simple reference for hashing and encoding formats.</p>
+            <div class="card-meta">PDF • 1 Page• 83 KB</div>
+        </div>
+        <a href="https://drive.google.com/file/d/1cpT_NbDnTKSF9GhgqO4ihhDqJRFidZZE/view?usp=drive_link" class="download-btn">Download</a>
+    </div>
+</div>
+
+            
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="cheatsheets.html">Cheatsheets</a>
+                <a href="ebooks.html">eBooks</a>
+                <a href="videos.html">Recorded Videos</a>
+                <a href="courses.html">Courses</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="playlists.html">YouTube Playlists</a>
+                <a href="roadmaps.html">Roadmaps</a>
+                <a href="bootcamps.html">Bootcamps/Hackathons</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <a href="cybersecbay@gmail.com">cybersecbay@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cybersecbay. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Matrix Background Animation
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ff6b35';
+            ctx.font = fontSize + 'px monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Burger Menu Toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!burgerMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+                burgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
